@@ -1,10 +1,10 @@
-# TerraStream 🌍📹  
+# TerraStream
 
 TerraStream is an experimental AI project that explores how to turn *geospatial imagery* into smooth, continuous video experiences.  
 
 ---
 
-## 🔮 Project Plans  
+##  Project Plans  
 
 ### 1. Satellite Timelines  
 - Input: Sequential satellite images over time.  
