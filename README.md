@@ -12,7 +12,7 @@ TerraStream is an experimental AI project that explores how to turn *geospatial 
 - Use cases: Climate studies, urbanization tracking, storytelling with Earth data.  
 
 *Demo:*  
-![Satellite After](demo/demo2.gif)  
+![Satellite After](demo/demo2.mp4)  
 
 ---
 
@@ -24,10 +24,10 @@ TerraStream is an experimental AI project that explores how to turn *geospatial 
 
 *Demo:*  
 *Before*  
-![Street View Before](demo/demo3.gif)  
+![Street View Before](demo/demo3.mp4)  
 
 *After*  
-![Street View After](demo/demo1.gif)  
+![Street View After](demo/demo1.mp4)  
 
 ---
 
