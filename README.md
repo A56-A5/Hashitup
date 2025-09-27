@@ -11,6 +11,9 @@ TerraStream is an experimental AI project that explores how to turn **geospatial
 - Goal: Generate timeline videos showing environmental change, city growth, or seasonal transitions.  
 - Use cases: Climate studies, urbanization tracking, storytelling with Earth data.  
 
+**Demo:**  
+- [Satellite After](demo/demo2.mp4) 🎥  
+
 ---
 
 ### 2. Street View Smoothing  
@@ -18,6 +21,10 @@ TerraStream is an experimental AI project that explores how to turn **geospatial
 - Method: Use AI interpolation models (RIFE, FILM, LIFE) to generate in-between frames.  
 - Goal: Create smooth, dashcam-like video that simulates continuous movement along streets.  
 - Use cases: Virtual driving experiences, tourism, map previews.  
+
+**Demo:**  
+- [Street View Before](demo/demo3.mp4) 🎥  
+- [Street View After](demo/demo1.mp4) 🎥  
 
 ---
 
