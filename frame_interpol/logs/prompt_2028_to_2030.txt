@@ -1,0 +1,1 @@
+Given this satellite image of Bengaluru in 2028, analyze past changes and generate a realistic future satellite image for 2030, showing likely urban, vegetation, water, and infrastructure evolution. Preserve geography and satellite view realism.

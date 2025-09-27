@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Transformation Video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Powered Image Transformation</h1>
+
+        <div class="messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for category, message in messages %}
+                            <li class="{{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="form-section">
+            <h2>Upload Images & Generate Video</h2>
+            <form action="/process" method="post" enctype="multipart/form-data" id="upload-form">
+                <div class="form-group">
+                    <label for="file">Upload Image:</label>
+                    <input type="file" id="file" name="file" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="location_name">Location Name:</label>
+                    <input type="text" id="location_name" name="location_name" placeholder="e.g., Eiffel Tower" required>
+                </div>
+                <div class="form-group">
+                    <label for="input_year">Input Year:</label>
+                    <input type="number" id="input_year" name="input_year" placeholder="e.g., 2000" required>
+                </div>
+                <div class="form-group">
+                    <label for="target_year">Target Year:</label>
+                    <input type="number" id="target_year" name="target_year" placeholder="e.g., 2020" required>
+                </div>
+                <div class="form-group">
+                    <label for="interval">Interval (years):</label>
+                    <input type="number" id="interval" name="interval" placeholder="e.g., 5" required>
+                </div>
+                <button type="submit">Generate Transformation Video</button>
+            </form>
+        </div>
+
+        <div id="loading-animation" class="loading-text" style="display:none;">
+            <span>P</span><span>r</span><span>o</span><span>c</span><span>e</span><span>s</span><span>s</span><span>i</span><span>n</span><span>g</span><span>.</span><span>.</span><span>.</span>
+        </div>
+
+        {% if uploaded_image %}
+        <div class="image-gallery">
+            <h2>Uploaded Image</h2>
+            <img src="{{ url_for('main.serve_image', filename='user_uploads/' + uploaded_image) }}" alt="Uploaded Image">
+        </div>
+        {% endif %}
+
+        {% if generated_images %}
+        <div class="image-gallery">
+            <h2>Generated Images</h2>
+            {% for image in generated_images %}
+            <img src="{{ url_for('main.serve_image', filename='predictions/' + image) }}" alt="Generated Image">
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="video-preview">
+            {% if video_url %}
+            <h2>Generated Video</h2>
+            <video controls width="640" height="480">
+                <source src="{{ video_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p><a href="{{ video_url }}" download="{{ video_url.split('/')[-1] }}">Download Video</a></p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function() {
+            document.getElementById('loading-animation').style.display = 'flex';
+        });
+    </script>
+</body>
+</html>

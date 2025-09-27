@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satellite Future Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        input[type="file"], input[type="text"], input[type="number"], button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .prediction-result, .video-result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .prediction-result img, .video-result video {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .loading {
+            display: none;
+            margin-top: 20px;
+            color: #007bff;
+        }
+        .toggle-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .toggle-button {
+            background-color: #e0e0e0;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+        .toggle-button.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Satellite Future Predictor</h1>
+
+        <div class="toggle-container">
+            <button class="toggle-button active" id="singleImageBtn">Single-Image Prediction</button>
+            <button class="toggle-button" id="dualImageBtn">Dual-Image Transformation Video</button>
+        </div>
+
+        <div id="singleImageSection">
+            <h2>Single-Image Prediction</h2>
+            <form id="predictionForm" enctype="multipart/form-data">
+                <input type="file" name="image" accept="image/*" required>
+                <input type="number" name="year" placeholder="Enter target year (e.g., 2030)" required>
+                <button type="submit">Predict Future</button>
+            </form>
+        </div>
+
+        <div id="dualImageSection" style="display: none;">
+            <h2>Dual-Image Transformation Video</h2>
+            <form id="transformationForm" enctype="multipart/form-data">
+                <input type="file" name="image1" accept="image/*" required>
+                <input type="number" name="year1" placeholder="Year of first image (e.g., 2020)" required>
+                <input type="file" name="image2" accept="image/*" required>
+                <input type="number" name="year2" placeholder="Year of second image (e.g., 2030)" required>
+                <input type="text" name="location" placeholder="Location Name (e.g., New York City)" required>
+                <button type="submit">Generate Transformation Video</button>
+            </form>
+        </div>
+
+        <div class="loading" id="loadingSpinner">
+            Loading...
+        </div>
+
+        <div class="prediction-result" id="predictionResult">
+            <!-- Single image prediction result will be displayed here -->
+        </div>
+
+        <div class="video-result" id="videoResult">
+            <!-- Dual image transformation video result will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        const singleImageBtn = document.getElementById('singleImageBtn');
+        const dualImageBtn = document.getElementById('dualImageBtn');
+        const singleImageSection = document.getElementById('singleImageSection');
+        const dualImageSection = document.getElementById('dualImageSection');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const predictionResult = document.getElementById('predictionResult');
+        const videoResult = document.getElementById('videoResult');
+
+        function showSection(sectionId) {
+            singleImageSection.style.display = 'none';
+            dualImageSection.style.display = 'none';
+            predictionResult.innerHTML = '';
+            videoResult.innerHTML = '';
+            loadingSpinner.style.display = 'none';
+
+            if (sectionId === 'single') {
+                singleImageSection.style.display = 'block';
+                singleImageBtn.classList.add('active');
+                dualImageBtn.classList.remove('active');
+            } else {
+                dualImageSection.style.display = 'block';
+                dualImageBtn.classList.add('active');
+                singleImageBtn.classList.remove('active');
+            }
+        }
+
+        singleImageBtn.addEventListener('click', () => showSection('single'));
+        dualImageBtn.addEventListener('click', () => showSection('dual'));
+
+        document.getElementById('predictionForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            predictionResult.innerHTML = '';
+            loadingSpinner.style.display = 'block';
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.prediction_image_url) {
+                        predictionResult.innerHTML = `<img src="${data.prediction_image_url}" alt="Prediction">`;
+                    } else {
+                        predictionResult.innerHTML = `<p>Error: ${data.error || 'Unknown prediction error'}</p>`;
+                    }
+                } else {
+                    predictionResult.innerHTML = `<p>Error: ${data.error || 'Something went wrong'}</p>`;
+                }
+            } catch (error) {
+                predictionResult.innerHTML = `<p>An error occurred: ${error.message}</p>`;
+                console.error('Error:', error);
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        document.getElementById('transformationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            videoResult.innerHTML = '';
+            loadingSpinner.style.display = 'block';
+
+            try {
+                // This route will be implemented in routes.py
+                const response = await fetch('/transform_video', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.video_url) {
+                        videoResult.innerHTML = `<video controls src="${data.video_url}"></video><br><a href="${data.video_url}" download>Download Video</a>`;
+                    } else {
+                        videoResult.innerHTML = `<p>Error: ${data.error || 'Unknown video transformation error'}</p>`;
+                    }
+                } else {
+                    videoResult.innerHTML = `<p>Error: ${data.error || 'Something went wrong'}</p>`;
+                }
+            } catch (error) {
+                videoResult.innerHTML = `<p>An error occurred: ${error.message}</p>`;
+                console.error('Error:', error);
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

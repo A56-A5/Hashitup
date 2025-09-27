@@ -1,0 +1,15 @@
+torch
+torchvision
+opencv-python
+numpy
+matplotlib
+Pillow
+Flask
+pollinations
+moviepy
+requests
+tqdm
+scipy
+scikit-image
+google-generativeai
+python-dotenv

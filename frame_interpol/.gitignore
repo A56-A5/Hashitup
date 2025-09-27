@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+
+# Editor/IDE specific files
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Data
+data/
+
+# Cache
+.pytest_cache/
+
+# Environment variables
+.env
+
+# Outputs
+model/output/
+demo/static/output/
+demo/static/outputs/
