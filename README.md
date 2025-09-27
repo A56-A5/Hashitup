@@ -1,18 +1,18 @@
-# TerraStream
+# TerraStream 🌍📹  
 
-TerraStream is an experimental AI project that explores how to turn *geospatial imagery* into smooth, continuous video experiences.  
+TerraStream is an experimental AI project that explores how to turn **geospatial imagery** into smooth, continuous video experiences.  
 
 ---
 
-##  Project Plans  
+## 🔮 Project Plans  
 
 ### 1. Satellite Timelines  
 - Input: Sequential satellite images over time.  
 - Goal: Generate timeline videos showing environmental change, city growth, or seasonal transitions.  
 - Use cases: Climate studies, urbanization tracking, storytelling with Earth data.  
 
-*Demo:*  
-![Satellite After](demo/demo2.mp4)  
+**Demo:**  
+- [Satellite After](demo/demo2.mp4) 🎥  
 
 ---
 
@@ -22,25 +22,22 @@ TerraStream is an experimental AI project that explores how to turn *geospatial 
 - Goal: Create smooth, dashcam-like video that simulates continuous movement along streets.  
 - Use cases: Virtual driving experiences, tourism, map previews.  
 
-*Demo:*  
-*Before*  
-![Street View Before](demo/demo3.mp4)  
-
-*After*  
-![Street View After](demo/demo1.mp4)  
+**Demo:**  
+- [Street View Before](demo/demo3.mp4) 🎥  
+- [Street View After](demo/demo1.mp4) 🎥  
 
 ---
 
 ### 3. Interpolation Engine  
 - A standalone module focused on frame interpolation.  
-- Accepts Street View points as *keyframes* and synthesizes motion between them.  
+- Accepts Street View points as **keyframes** and synthesizes motion between them.  
 - Goal: Build a flexible backbone for geospatial video generation.  
 - Use cases: Any project needing smooth transitions between sparse visual data points.  
 
 ---
 
 ## 🚀 Vision  
-- Combine all modules into a single pipeline for *Earth storytelling*.  
-- Add support for *360° and VR-ready videos*.  
-- Provide a foundation for research in *AI + geospatial visualization*.  
-- Eventually, offer an accessible platform where users can input satellite or street data and automatically generate cinematic visualizations.
+- Combine all modules into a single pipeline for **Earth storytelling**.  
+- Add support for **360° and VR-ready videos**.  
+- Provide a foundation for research in **AI + geospatial visualization**.  
+- Eventually, offer an accessible platform where users can input satellite or street data and automatically generate cinematic visualizations.  
